@@ -21,7 +21,7 @@ If _r_ is an R-Register in the ISA, then a variable is either:
 
 A constant is a 32-bit sized integer in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1].
 
-#### Definition of a Operative Instructions
+#### Definition of an Operative Instruction
 
 For a Variable _v_ in the ISA; a Constant _c_; an R-Register _r_; and _g_ representing either the add operation + or the multiplication \*, an Operative Instruction _p_ is such that either:
 
@@ -48,7 +48,7 @@ A Formula φ is such that either:
 - φ :≡ _P_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _P_ is an n-ary predicate and each _t_<sub>i</sub> is a Term.
 - φ :≡ ¬(α), where α is a Formula of the ISA.
 - φ :≡ \\\/(α, β) where α and β are formulas of the ISA.
-- φ :≡ /\\\<space></space>(α, β) where α and β are formulas of the ISA.
+- φ :≡ /\\(α, β) where α and β are formulas of the ISA.
 
 #### Definition of a Term Assignment Instruction.
 
