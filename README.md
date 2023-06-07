@@ -27,9 +27,9 @@ For a Variable _v_ in the ISA; a Constant _c_; an R-Register _r_; and _g_ repres
 
 - _p_ :≡ _g_(_r_<sub>i</sub>, ..., _r_<sub>k</sub>, ..., _r_<sub>n</sub>), where _g_ is n-ary and each _r_<sub>i</sub> is an R-Register such that _r_<sub>i</sub> ≠ _r_<sub>k</sub>.
 - _p_ :≡ _g_(_v_<sub>1</sub>, _v_<sub>2</sub>), where _g_ is binary and each _v_<sub>i</sub> is a Variable in the ISA.
-- _p_ :≡ _g_(_v_, _c_), where _g_ is a binary.
-- _p_ :≡ _g_(_v_, _f_), where _g_ is a binary and _f_ is a function (defined later in Term).
-- _p_ :≡ _g_(_v_, _p_<sub>i</sub>), where _g_ is a binary and _p_<sub>i</sub> is an Operative Instruction in the ISA.
+- _p_ :≡ _g_(_v_, _c_), where _g_ is binary.
+- _p_ :≡ _g_(_v_, _f_), where _g_ is binary and _f_ is a function (defined later in Term).
+- _p_ :≡ _g_(_v_, _p_<sub>i</sub>), where _g_ is binary and _p_<sub>i</sub> is an Operative Instruction in the ISA.
 
 #### Definition of a Term
 
@@ -40,4 +40,16 @@ A Term _t_ is such that either:
 - _t_ is an Operative Instruction, or
 - _t_ :≡ _f_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _f_ is an n-ary function and each _t_<sub>i</sub> is a Term.
 
-#### Definition of an Assignment Instruction.
+#### Definition of a Formula
+
+A Formula φ is such that either:
+
+- φ :≡ = (_t_<sub>1</sub>, _t_<sub>2</sub>), where _t_<sub>1</sub> are _t_<sub>2</sub> Terms of the ISA.
+- φ :≡ _P_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _P_ is an n-ary predicate and each _t_<sub>i</sub> is a Term.
+- φ :≡ ¬(α), where α is a Formula of the ISA.
+- φ :≡ \/(α, β) where α and β are formulas of the ISA.
+- φ :≡ /\/(α, β) where α and β are formulas of the ISA.
+
+#### Definition of a Term Assignment Instruction.
+
+If _t_ is a Term in the ISA, a Term Assignment Instruction
