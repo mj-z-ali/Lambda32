@@ -47,8 +47,8 @@ A Formula φ is such that either:
 - φ :≡ = (_t_<sub>1</sub>, _t_<sub>2</sub>), where _t_<sub>1</sub> are _t_<sub>2</sub> Terms of the ISA.
 - φ :≡ _P_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _P_ is an n-ary predicate and each _t_<sub>i</sub> is a Term.
 - φ :≡ ¬(α), where α is a Formula of the ISA.
-- φ :≡ \/(α, β) where α and β are formulas of the ISA.
-- φ :≡ /\/(α, β) where α and β are formulas of the ISA.
+- φ :≡ \\\/(α, β) where α and β are formulas of the ISA.
+- φ :≡ /\\\<space></space>(α, β) where α and β are formulas of the ISA.
 
 #### Definition of a Term Assignment Instruction.
 
