@@ -62,6 +62,27 @@ The ISA Structure _M_ is the set _A_ { i | -2<sup>31</sup> ≤ i ≤ 2<sup>31</s
 - For each _n_-ary function _f_, a function _f_<sup>_M_</sup> : _A_<sup>n</sup> -> _A_.
 - For each _n_-ary Operative Instruction _g_, an Operative Instruction _g_<sup>_M_</sup> : _A_<sup>n</sup> -> _A_.
 
-#### Definition of a Variable Assignment Function
+#### Definition of the Variable Assignment Function
 
-If _t_ is a Term in the ISA, a Term Assignment Instruction
+If _M_ is the ISA Structure, then a Variable Assignment Function _s_ maps each Variable in the ISA to an element of the universe _A_. In other words, _s_ is a function with domain Variable and codomain _A_ as follows:
+
+Variable -> _A_
+
+#### Definition of the Term Assignment Function
+
+For the ISA Structure _M_ and the Variable Assignment Function _s_ into _M_, the Term Assignment Function _s_' has a domain Term of the ISA and codomain _A_ and is defined recursively as follows:
+
+- If _t_ is a Variable, _s_'(_t_) = _s_(_t_)
+- If _t_ is a Constant c, _s_'(_t_) = c<sup>_M_</sup>
+- If _t_ :≡ _g_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), such that _g_ is an _n_-ary Operative Instruction in the ISA, then _s_'(_t_) = _g_<sup>_M_</sup>(_s_'(_t_<sub>i</sub>), ..., _s_'(_t_<sub>k</sub>), ..., _s_'(_t_<sub>n</sub>))
+- If _t_ :≡ _f_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), such that _f_ is an _n_-ary function in the ISA, then _s_'(_t_) = _f_<sup>_M_</sup>(_s_'(_t_<sub>i</sub>), ..., _s_'(_t_<sub>k</sub>), ..., _s_'(_t_<sub>n</sub>))
+
+#### Definition of the Assignment Instruction
+
+The Assignment Instruction, defined as:
+
+_v_ -> _t_, where _v_ is a Variable and _t_ is a Term in the ISA,
+
+assigns a Variable _v_ to a mapped element of _A_ from a Term _t_ after implicity doing the following:
+
+_v_ -> _s_'(_t_), where _v_ is a Variable of the ISA and _s_' is a Term Assignment Function.
