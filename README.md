@@ -25,11 +25,15 @@ A constant is a 32-bit sized integer in the range [-2<sup>31</sup>, 2<sup>31</su
 
 For a Variable _v_ in the ISA; a Constant _c_; an R-Register _r_; and _g_ representing either the add operation + or the multiplication \*, an Operative Instruction _p_ is such that either:
 
-- _p_ :≡ _g_(_r_<sub>i</sub>, ..., _r_<sub>k</sub>, ..., _r_<sub>n</sub>), where _g_ is n-ary and each _r_<sub>i</sub> is an R-Register such that _r_<sub>i</sub> ≠ _r_<sub>k</sub>.
-- _p_ :≡ _g_(_v_<sub>1</sub>, _v_<sub>2</sub>), where _g_ is binary and each _v_<sub>i</sub> is a Variable in the ISA.
-- _p_ :≡ _g_(_v_, _c_), where _g_ is binary.
-- _p_ :≡ _g_(_v_, _f_), where _g_ is binary and _f_ is a function (defined later in Term).
-- _p_ :≡ _g_(_v_, _p_<sub>i</sub>), where _g_ is binary and _p_<sub>i</sub> is an Operative Instruction in the ISA.
+- _p_ :≡ _g_(_r_<sub>i</sub>, ..., _r_<sub>k</sub>, ..., _r_<sub>n</sub>), where _g_ is _n_-ary and each _r_<sub>i</sub> is an R-Register such that _r_<sub>i</sub> ≠ _r_<sub>k</sub>.
+- _p_ :≡ _g_(_v_<sub>1</sub>, _v_<sub>2</sub>), where _g_ is a binary operation and each _v_<sub>i</sub> is a Variable in the ISA.
+- _p_ :≡ _g_(_v_, _c_), where _g_ is a binary operation.
+- _p_ :≡ _g_(_v_, _f_), where _g_ is a binary operation and _f_ is a function (defined later in Term).
+- _p_ :≡ _g_(_v_, _p_<sub>i</sub>), where _g_ is a binary operation and _p_<sub>i</sub> is an Operative Instruction in the ISA.
+- _p_ :≡ -(_v_), where - is a unary operation.
+- _p_ :≡ -(_c_), where - is a unary operation.
+- _p_ :≡ -(_f_), where - is a unary operation and _f_ is a function (defined later in Term).
+- _p_ :≡ -(_p_<sub>i</sub>), where - is a unary operation and _p_<sub>i</sub> is an Operative Instruction in the ISA.
 
 #### Definition of a Term
 
@@ -38,18 +42,26 @@ A Term _t_ is such that either:
 - _t_ is a Variable, or
 - _t_ is a Constant, or
 - _t_ is an Operative Instruction, or
-- _t_ :≡ _f_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _f_ is an n-ary function and each _t_<sub>i</sub> is a Term.
+- _t_ :≡ _f_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _f_ is an _n_-ary function and each _t_<sub>i</sub> is a Term.
 
 #### Definition of a Formula
 
 A Formula φ is such that either:
 
-- φ :≡ = (_t_<sub>1</sub>, _t_<sub>2</sub>), where _t_<sub>1</sub> are _t_<sub>2</sub> Terms of the ISA.
-- φ :≡ _P_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _P_ is an n-ary predicate and each _t_<sub>i</sub> is a Term.
+- φ :≡ = (_t_<sub>1</sub>, _t_<sub>2</sub>), where _t_<sub>1</sub> and _t_<sub>2</sub> are Terms of the ISA.
+- φ :≡ _P_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _P_ is an _n_-ary predicate and each _t_<sub>i</sub> is a Term.
 - φ :≡ ¬(α), where α is a Formula of the ISA.
-- φ :≡ \\\/(α, β) where α and β are formulas of the ISA.
+- φ :≡ \\/(α, β) where α and β are formulas of the ISA.
 - φ :≡ /\\(α, β) where α and β are formulas of the ISA.
 
-#### Definition of a Term Assignment Instruction.
+#### Definition of the ISA Structure
+
+The ISA Structure _M_ is the set _A_ { i | -2<sup>31</sup> ≤ i ≤ 2<sup>31</sup> - 1}, called the universe of _M_, together with:
+
+- For each Constant c, an element c<sup>_M_</sup> of _A_.
+- For each _n_-ary function _f_, a function _f_<sup>_M_</sup> : _A_<sup>n</sup> -> _A_.
+- For each _n_-ary Operative Instruction _g_, an Operative Instruction _g_<sup>_M_</sup> : _A_<sup>n</sup> -> _A_.
+
+#### Definition of a Variable Assignment Function
 
 If _t_ is a Term in the ISA, a Term Assignment Instruction
