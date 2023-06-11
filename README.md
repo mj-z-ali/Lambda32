@@ -35,7 +35,7 @@ For a Variable _v_ in the ISA; a Constant _c_; an R-Register _r_; and _g_ repres
 - _p_ :≡ -(_f_), where - is a unary operation and _f_ is a function (defined later in Term).
 - _p_ :≡ -(_p_<sub>i</sub>), where - is a unary operation and _p_<sub>i</sub> is an Operative Instruction in the ISA.
 
-#### Definition of a Term
+#### Definition of a Term <a href="#ref1">[1]</a>
 
 A Term _t_ is such that either:
 
@@ -45,7 +45,7 @@ A Term _t_ is such that either:
 - _t_ is an IF THEN ELSE Instruction (defined later), or
 - _t_ :≡ _f_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _f_ is an _n_-ary function and each _t_<sub>i</sub> is a Term
 
-#### Definition of a Formula
+#### Definition of a Formula <a href="#ref1">[1]</a>
 
 A Formula φ is such that either:
 
@@ -61,7 +61,7 @@ If φ is a Formula in the ISA and _t_<sub>1</sub> and _t_<sub>2</sub> are Terms,
 
 IF φ THEN _t_<sub>1</sub> ELSE _t_<sub>2</sub>
 
-#### Definition of the ISA Structure
+#### Definition of the ISA Structure <a href="#ref1">[1]</a>
 
 The ISA Structure _M_ is the set _A_ { i | -2<sup>31</sup> ≤ i ≤ 2<sup>31</sup> - 1}, called the universe of _M_, together with:
 
@@ -69,13 +69,13 @@ The ISA Structure _M_ is the set _A_ { i | -2<sup>31</sup> ≤ i ≤ 2<sup>31</s
 - For each _n_-ary function _f_, a function _f_<sup>_M_</sup> : _A_<sup>n</sup> -> _A_.
 - For each _n_-ary Operative Instruction _g_, an Operative Instruction _g_<sup>_M_</sup> : _A_<sup>n</sup> -> _A_.
 
-#### Definition of the Variable Assignment Function
+#### Definition of the Variable Assignment Function <a href="#ref1">[1]</a>
 
 If _M_ is the ISA Structure, then a Variable Assignment Function _s_ maps each Variable in the ISA to an element of the universe _A_. In other words, _s_ is a function with domain Variable and codomain _A_ as follows:
 
 Variable -> _A_
 
-#### Definition of the Term Assignment Function
+#### Definition of the Term Assignment Function <a href="#ref1">[1]</a>
 
 For the ISA Structure _M_ and the Variable Assignment Function _s_ into _M_, the Term Assignment Function _s_' has a domain Term of the ISA and codomain _A_ and is defined recursively as follows:
 
@@ -94,6 +94,6 @@ assigns a Variable _v_ to a mapped element of _A_ from a Term _t_ after implicit
 
 _v_ -> _s_'(_t_), where _v_ is a Variable of the ISA and _s_' is a Term Assignment Function.
 
-...as mentioned in the textbook[1]...
+#### References
 
-[1]: AuthorLastName, AuthorFirstName. _Title of Book_. Publisher, Publication Year.
+<a id="ref1">[1]</a> <a href="https://knightscholar.geneseo.edu/geneseo-authors/6?utm_source=knightscholar.geneseo.edu%2Fgeneseo-authors%2F6&utm_medium=PDF&utm_campaign=PDFCoverPages"> Leary, Christopher C. and Kristiansen, Lars, "A Friendly Introduction to Mathematical Logic" (2015). Geneseo Authors. 6. </a>
