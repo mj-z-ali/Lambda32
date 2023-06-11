@@ -96,4 +96,4 @@ _v_ -> _s_'(_t_), where _v_ is a Variable of the ISA and _s_' is a Term Assignme
 
 #### References
 
-<a id="ref1">[1]</a> <a href="https://knightscholar.geneseo.edu/geneseo-authors/6?utm_source=knightscholar.geneseo.edu%2Fgeneseo-authors%2F6&utm_medium=PDF&utm_campaign=PDFCoverPages"> Leary, Christopher C. and Kristiansen, Lars, "A Friendly Introduction to Mathematical Logic" (2015). Geneseo Authors. 6. </a>
+<a id="ref1">[1]</a> <a href="https://knightscholar.geneseo.edu/geneseo-authors/6?utm_source=knightscholar.geneseo.edu%2Fgeneseo-authors%2F6&utm_medium=PDF&utm_campaign=PDFCoverPages" target="_blank"> Leary, Christopher C. and Kristiansen, Lars, "A Friendly Introduction to Mathematical Logic" (2015). Geneseo Authors. 6. </a>
