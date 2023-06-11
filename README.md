@@ -93,3 +93,7 @@ _v_ -> _t_, where _v_ is a Variable and _t_ is a Term in the ISA,
 assigns a Variable _v_ to a mapped element of _A_ from a Term _t_ after implicity doing the following:
 
 _v_ -> _s_'(_t_), where _v_ is a Variable of the ISA and _s_' is a Term Assignment Function.
+
+...as mentioned in the textbook[1]...
+
+[1]: AuthorLastName, AuthorFirstName. _Title of Book_. Publisher, Publication Year.
