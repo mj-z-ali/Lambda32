@@ -1,5 +1,21 @@
 # Lambda32
 
+## Table of Contents
+
+1. [ISA](#ISA)
+   - [R-Register](#Definition-of-an-R-Register)
+   - [Variable](#Definition-of-a-Variable)
+   - [Constant](#Definition-of-a-Constant)
+   - [Operative Instruction](#Definition-of-an-Operative-Instruction)
+   - [Term](#definition-of-a-term-1)
+   - [Formula](#definition-of-a-formula-1)
+   - [IF THEN ELSE Instruction](#definition-of-an-if-then-else-instruction)
+   - [ISA Structure](#definition-of-the-isa-structure-1)
+   - [Variable Assignment](#definition-of-the-variable-assignment-function-1)
+   - [Term Assignment](#definition-of-the-term-assignment-function-1)
+   - [Assignment Instruction](#definition-of-the-assignment-instruction)
+   - [References](#references)
+
 ### ISA
 
 #### Definition of an R-Register
