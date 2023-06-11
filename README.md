@@ -42,7 +42,8 @@ A Term _t_ is such that either:
 - _t_ is a Variable, or
 - _t_ is a Constant, or
 - _t_ is an Operative Instruction, or
-- _t_ :≡ _f_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _f_ is an _n_-ary function and each _t_<sub>i</sub> is a Term.
+- _t_ is an IF THEN ELSE Instruction (defined later), or
+- _t_ :≡ _f_(_t_<sub>i</sub>, ..., _t_<sub>k</sub>, ..., _t_<sub>n</sub>), where _f_ is an _n_-ary function and each _t_<sub>i</sub> is a Term
 
 #### Definition of a Formula
 
@@ -53,6 +54,12 @@ A Formula φ is such that either:
 - φ :≡ ¬(α), where α is a Formula of the ISA.
 - φ :≡ \\/(α, β) where α and β are formulas of the ISA.
 - φ :≡ /\\(α, β) where α and β are formulas of the ISA.
+
+#### Definition of an IF THEN ELSE Instruction
+
+If φ is a Formula in the ISA and _t_<sub>1</sub> and _t_<sub>2</sub> are Terms, then an IF THEN ELSE Instruction is defined as follows:
+
+IF φ THEN _t_<sub>1</sub> ELSE _t_<sub>2</sub>
 
 #### Definition of the ISA Structure
 
