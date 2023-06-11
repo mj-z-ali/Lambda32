@@ -1,5 +1,13 @@
 # Lambda32
 
+## Summary
+
+Lambda32 is a 32-bit, out-of-order execution processor that is mathematically specified and verified for correctness.
+using First-Order Logic and Finite-State Automata. Its name, Lambda32, came about as it features pure instructions
+based on the concept of mathematical functions, treating computation as the evaluation of mathematical functions and
+avoiding changing-state and mutable data. In addition, Lambda32 contains vector and matrix operations for enhanced
+neural network operations. A simulation of Lambda32 was written in Verilog.
+
 ## Table of Contents
 
 1. [ISA](#ISA)
