@@ -1,0 +1,65 @@
+
+\documentclass{article}
+\usepackage{lipsum,amsmath, amssymb, amsthm, tikz}
+
+\title{Specifying and Verifying a Carry-Look-Ahead Adder for the Lambda32 Processor}
+\author{Amjad Ali}
+
+\newtheorem{lemma}{Lemma}
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\lipsum[1]
+\end{abstract}
+
+\section{Introduction}
+\lipsum[1-2] 
+
+\section{Preliminaries}
+In this section, we introduce the fundamental building blocks that are essential throughout our proof. Let us begin by defining a carry-out and sum output of a typical 1-bit full-adder. In a standard 1-bit full-adder architecture, there are three inputs: a and b represent the primary operands, and c serves as the carry-in.
+
+\noindent \textbf{Definition 2.1} Suppose $a$, $b$, and $c$ are propositions. Then, carry-out and sum are denoted by the following predicates:
+
+\begin{enumerate}
+	\item $CO(a, b, c) :\equiv (a \land b) \lor (a \land c) \lor (b \land c)$
+	\item $S(a, b, c) :\equiv (\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor (a \land b \land c) \lor (a \land \lnot b \land \lnot c)$
+\end{enumerate}
+
+In a standard 1-bit full-adder, the carry-out is  $True$ when two, or all, of its operands are $True$. Further scrutiny of our minimal definition of $CO$ shows it conforms with this behavior:
+
+\noindent \textbf{Lemma 2.1}  $CO(a, b, c) =  (\lnot a \land b \land c) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) \lor (a \land b \land c)$ 
+
+\begin{proof}
+	\begin{align*}
+		(1) &  \quad (\lnot a \land b \land c) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) \lor (a \land b \land c) & \text{Given} \\
+		(2) & \quad (b \land c) \land (\lnot a \lor a) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) & \text{Distrib} \\
+		(3) & \quad (b \land c) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) & \text{Compl} \\
+		(4) & \quad (c \land (b \lor (a \land \lnot b)))  \lor (a \land b \land \lnot c) & \text{Distrib} \\
+		(5) & \quad (c \land (b \lor a \land b \lor \lnot b))  \lor (a \land b \land \lnot c) & \text{Distrib} \\
+		(6) & \quad (c \land (b \lor a))  \lor (a \land b \land \lnot c) & \text{Compl} \\
+		(7) & \quad (c \land b) \lor (c \land a) \lor (a \land b \land \lnot c) & \text{Distrib} \\
+		(8) & \quad (b \land (c \lor (a \land \lnot c)) \lor (c \land a)  & \text{Distrib} \\
+		(9) & \quad (b \land (c \lor a)) \lor (c \land a)  & \text{Distrib, Compl} \\
+		(10) & \quad  (a \land b) \lor (a \land c) \lor (b \land c) & \text{Distrib, Commut} \\
+	\end{align*}
+\end{proof}
+
+The $S$ output in a conventional full-adder should result to $True$ when exactly one, or all, of its inputs are $True$. Since our proposed definition of $S$ was not simplified, no further justification is necessary.
+
+We will now build upon our previous definitions to specify a standard $N$-bit carry-ripple adder.
+\newpage
+\noindent \textbf{Definition 2.2} Suppose $a_n$, $a_{n-1}$, $...$, $a_0$, $b_n$, $b_{n-1}$, $...$, $b_0$, and $c$ are propositions. Then, carry-out and sum outputs of an $N$-bit carry-ripple adder are defined as follows: 
+\begin{enumerate}
+	\item $ CRACO(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv CO(a_n, b_n, CO(..., CO(a_0, b_0, c))...)$
+	\item $ CRAS :\equiv S(a_n, b_n, CRACO(a_{n-1}, ..., a_0, b_{n-1}, ..., b_0, c)) $
+\end{enumerate}
+
+
+\section{Proof}
+Begin your proof here...
+
+
+\end{document}
