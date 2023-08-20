@@ -51,15 +51,16 @@ The $S$ output in a conventional full-adder should result to $True$ when exactly
 
 We will now build upon our previous definitions to specify a standard $N$-bit carry-ripple adder.
 \newpage
-\noindent \textbf{Definition 2.2} Suppose $a_n$, $a_{n-1}$, $...$, $a_0$, $b_n$, $b_{n-1}$, $...$, $b_0$, and $c$ are propositions. Then, carry-out and sum outputs of an $N$-bit carry-ripple adder are defined as follows: 
+\noindent \textbf{Definition 2.2} Suppose $a_n$, $a_{n-1}$, $...$, $a_0$, $b_n$, $b_{n-1}$, $...$, $b_0$, and $c$ are propositions for any integer $ n \geq 0$. Then, carry-out and sum outputs of an $N$-bit carry-ripple adder are defined as follows: 
 \begin{enumerate}
 	\item $ CRACO(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv CO(a_n, b_n, CO(..., CO(a_0, b_0, c))...)$
-	\item $ CRAS :\equiv S(a_n, b_n, CRACO(a_{n-1}, ..., a_0, b_{n-1}, ..., b_0, c)) $
+	\item $ CRAS(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv S(a_n, b_n, CRACO(a_{n-1}, ..., a_0, b_{n-1}, ..., b_0, c)) $
 \end{enumerate}
 
+This definition highlights the recursive nature of \( CRACO \) and, by extension, \( CRAS \). This recursive structure arises because the output of each full-adder in a carry-ripple configuration depends on the carry-out of its preceding full-adders. With the essential building blocks defined, we can now delve into the details of our carry-look-ahead adder.
 
-\section{Proof}
-Begin your proof here...
+\section{Carry-Look-Ahead Adder}
+Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple configurations. They accomplish this by pre-calculating the carry-out dependencies. However, due to their complexity and size, we will focus only on  a 2-bit design, effectively halving our adder's state count.
 
 
 \end{document}
