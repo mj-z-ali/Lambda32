@@ -6,11 +6,11 @@ Import ListNotations.
 Notation "¬ P" := (not P) (at level 75, right associativity).
 
 
-(* Standard Definition of 1-bit carry-out*)
+(* Definition of carry-out in a standard full-adder configuration *)
 Definition CO (a b c : Prop) : Prop :=
   (a /\ b) \/ (a /\ c) \/ (b /\ c).
 
-(* Above is standard definition. Really, no need to prove it.*)
+(* Theorem to reinforce that our minimal definition of carry-out is the standard *)
 Theorem CO_Correct :
   forall a b c : Prop,
     CO  a b c <-> 
@@ -18,116 +18,122 @@ Theorem CO_Correct :
 
 Proof.
   intros a b c. (* Introduce the propositions *)
-  unfold CO .  (* Unfold the definition CO_1BIT  *)
+  unfold CO .  (* Unfold the definition CO  *)
   tauto.
 Qed.
 
-(* Standard Definition of S_0 in 1-bit Full-Adder *)
-Definition S0 (a b c : Prop) : Prop := 
+(* Definition of sum output in a standard full-adder configuration *)
+Definition S (a b c : Prop) : Prop := 
   (¬a /\ ¬b /\ c) \/ (¬a /\ b /\ ¬c) \/ (a /\ b /\ c) \/ (a /\ ¬b /\ ¬c).
 
-(* S_0 in carry-lookahead adder x2 *)
-Definition S0LA (a b c : Prop) : Prop :=
+
+(* Our carry-look-ahead adder has two sum outputs and a carry-out *)
+
+(* Our definition of the first sum output in a carry-lookahead adder x2 *)
+Definition CLAS0 (a b c : Prop) : Prop :=
   (¬a /\ ¬b /\ c) \/ (¬a /\ b /\ ¬c) \/ (a /\ b /\ c) \/ (a /\ ¬b /\ ¬c).
 
-Theorem S0LA_Correct :
+(* First sum output in CLA should be the same as sum output in a standard full-adder *)
+Theorem CLAS0_Correct :
   forall a b c : Prop,
-  S0LA a b c <-> S0 a b c.
+  CLAS0 a b c <-> S a b c.
 
 Proof.
   reflexivity.
 Qed.
 
 
-(* S_1 in carry-lookahead adder x2 *)
-Definition S1LA (a1 a0 b1 b0 c : Prop) : Prop :=
+(* Second sum output in our carry-look-ahead adder x2 *)
+Definition CLAS1 (a1 a0 b1 b0 c : Prop) : Prop :=
   (c /\ a1 /\ a0 /\ b1) \/ (c /\ a1 /\ b1 /\ b0) \/ (c /\ ¬a1 /\ a0 /\ ¬b1) \/ (c /\ ¬a1 /\ ¬b1 /\ b0) \/ 
   (a1 /\ ¬a0 /\ ¬b1 /\ ¬b0) \/ (¬a1 /\ ¬a0 /\ b1 /\ ¬b0) \/ (¬c /\ a1 /\ ¬b1 /\ ¬ b0) \/ (¬c /\ a1 /\ ¬a0 /\ ¬b1) \/
   (¬c /\ ¬a1 /\ b1 /\ ¬b0) \/ (¬c /\ ¬a1 /\ ¬a0 /\ b1) \/ (¬a1 /\ a0 /\ ¬b1 /\ b0) \/ (a1 /\ a0 /\ b1 /\ b0).
 
-(* S_1 in carry-lookahead should be equivalent to sum of second bits from a and b and the carryout from previous bits *)
-Theorem S1LA_Correct : 
+(* A standard 2-series carry-ripple configuration is two full-adders, such that the second FA takes the carry-out of the first as input *)
+
+(* Second sum output in carry-look-ahead should be equivalent to second sum output of a standard 2-series carry-ripple configuration *)
+Theorem CLAS1_Correct : 
   forall a1 a0 b1 b0 c : Prop,
-  S1LA a1 a0 b1 b0 c <-> S0 a1 b1 (CO a0 b0 c).
+  CLAS1 a1 a0 b1 b0 c <-> S a1 b1 (CO a0 b0 c).
 
 Proof. 
   intros a1 a0 b1 b0 c0.
-  unfold S1LA, S0, CO. 
+  unfold CLAS1, S, CO. 
   tauto.
 Qed.
 
-(* Carry-out in carry-lookahead adder x2 *)
-Definition COLA (a1 a0 b1 b0 c : Prop) : Prop :=
+(* Carry-out in our carry-look-ahead adder x2 *)
+Definition CLACO (a1 a0 b1 b0 c : Prop) : Prop :=
   (c /\ b1 /\ b0) \/ (c /\ a1 /\ a0) \/ (a1 /\ b1) \/ (c /\ a0 /\ b1) \/ (c /\ a1 /\ b0) \/ (a0 /\ b1 /\ b0) \/ (a1 /\ a0 /\ b0).
 
-(* Carry-out in carry-lookahead adder x2 should be equivalent to standard carry-out on 2 bits *)
-Theorem COLA_Correct :
+(* Carry-out in our carry-look-ahead adder should be equivalent to carry-out of a standard 2-series carry-ripple configuration *)
+Theorem CLACO_Correct :
   forall a1 a0 b1 b0 c : Prop,
-    COLA a1 a0 b1 b0 c <-> CO a1 b1 (CO a0 b0 c).
+    CLACO a1 a0 b1 b0 c <-> CO a1 b1 (CO a0 b0 c).
 
 Proof.
   intros a1 a0 b1 b0 c0.
-  unfold COLA, CO.
+  unfold CLACO, CO.
   tauto.
 Qed.
 
-(* Standard carry-out of full-adder *)
-Fixpoint FACO (a b : list Prop) (c : Prop) : Prop := 
+(* Carry-out of a standard N-bit carry-ripple configuration  *)
+Fixpoint CRACO (a b : list Prop) (c : Prop) : Prop := 
   match a, b with
-  |  a_head :: a_tail, b_head :: b_tail => CO a_head b_head (FACO a_tail b_tail c)
+  |  a_head :: a_tail, b_head :: b_tail => CO a_head b_head (CRACO a_tail b_tail c)
   | _, _ => c
   end.
 
-(* Carry-out of carry-lookahead full-adder *)
-Fixpoint FACOLA (a b : list Prop) (c : Prop) : Prop :=
+(* Carry-out of our N-bit carry-look-ahead adder *)
+Fixpoint CLANCO (a b : list Prop) (c : Prop) : Prop :=
   match a, b with
-  | a_head :: a_0 :: a_tail, b_head :: b_0 :: b_tail => COLA a_head a_0 b_head b_0 (FACOLA a_tail b_tail c)
+  | a_head :: a_0 :: a_tail, b_head :: b_0 :: b_tail => CLACO a_head a_0 b_head b_0 (CLANCO a_tail b_tail c)
   | _, _ => c
   end.
 
-(* Standard S_0 of full-adder *)
-Definition FAS0 (a b : list Prop) (c : Prop) : Prop :=
+(* Sum output of a standard N-bit carry-ripple adder *)
+Definition CRAS (a b : list Prop) (c : Prop) : Prop :=
   match a, b with
-  | a_head :: a_tail, b_head :: b_tail => S0 a_head b_head (FACO a_tail b_tail c)
+  | a_head :: a_tail, b_head :: b_tail => S a_head b_head (CRACO a_tail b_tail c)
   | _, _ => c
   end.
 
-(* S_0 of carry-lookahead full-adder  *)
-Definition FAS0LA (a b : list Prop) (c : Prop) : Prop :=
+(* First sum output of our N-bit carry-look-ahead adder  *)
+Definition CLANS0 (a b : list Prop) (c : Prop) : Prop :=
   match a, b with
-  | a_head :: a_tail, b_head :: b_tail => S0LA a_head b_head (FACOLA a_tail b_tail c)
+  | a_head :: a_tail, b_head :: b_tail => CLAS0 a_head b_head (CLANCO a_tail b_tail c)
   | _, _ => c
   end.
 
-(* S_1 of carry-lookahead full-adder *)
-Definition FAS1LA (a b : list Prop) (c : Prop) : Prop :=
+(* Second sum output of our N-bit carry-look-ahead adder *)
+Definition CLANS1 (a b : list Prop) (c : Prop) : Prop :=
   match a, b with
-  | a_head :: a_0 :: a_tail, b_head :: b_0 :: b_tail => S1LA a_head a_0 b_head b_0 (FACOLA a_tail b_tail c)
+  | a_head :: a_0 :: a_tail, b_head :: b_0 :: b_tail => CLAS1 a_head a_0 b_head b_0 (CLANCO a_tail b_tail c)
   | _, _ => c
   end.
 
-(* Validating correctness of carry-lookahead full-adder against the standard full-adder *)
+(* Validating correctness of carry-look-ahead adder against the standard carry-ripple adder *)
 
-Theorem FACOLA_Correct : 
+Theorem CLANCO_Correct : 
   forall (a b : list Prop) (c : Prop), 
   length a >= 2 /\ length b >= 2 -> 
-  FACOLA a b c <-> FACO a b c.
+  CLANCO a b c <-> CRACO a b c.
 Proof.
   intros a b c [HlenA HlenB].
 Admitted.
 
-Theorem FAS0LA_Correct :
+Theorem CLANS0_Correct :
   forall (a b : list Prop) (c : Prop), 
   length a >= 2 /\ length b >= 2 -> 
-  FAS0LA a b c <-> FAS0 a b c.
+  CLANS0 a b c <-> CRAS a b c.
 Proof.
   intros a b c [HlenA HlenB].
 Admitted.
 
-Theorem FAS1LA_Correct :
+Theorem CLANS1_Correct :
   forall (a b : list Prop) (c : Prop), 
   length a >= 2 /\ length b >= 2 -> 
-  FAS1LA a b c <-> FAS0 a b c.
+  CLANS1 a b c <-> CRAS a b c.
 Proof.
   intros a b c [HlenA HlenB].
 Admitted.
