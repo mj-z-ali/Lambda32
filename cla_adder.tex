@@ -25,16 +25,16 @@ In this section, we introduce the fundamental building blocks that are essential
 
 \begin{enumerate}
 	\item $CO(a, b, c) :\equiv (a \land b) \lor (a \land c) \lor (b \land c)$
-	\item $S(a, b, c) :\equiv (\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor (a \land b \land c) \lor (a \land \lnot b \land \lnot c)$
+	\item $S(a, b, c) :\equiv (\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor (a \land \lnot b \land \lnot c) \lor (a \land b \land c)$
 \end{enumerate}
 
 In a standard 1-bit full-adder, the carry-out is  $True$ when two, or all, of its operands are $True$. Further scrutiny of our minimal definition of $CO$ shows it conforms with this behavior:
 
-\noindent \textbf{Lemma 2.1}  $CO(a, b, c) =  (\lnot a \land b \land c) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) \lor (a \land b \land c)$ 
+\noindent \textbf{Lemma 2.1}  $ (\forall a, b, c \in \{T, F\})CO(a, b, c) \iff  (\lnot a \land b \land c) \lor (a \land \lnot b \land c) \lor \\ (a \land b \land \lnot c) \lor  (a \land b \land c)$ 
 
 \begin{proof}
 	\begin{align*}
-		(1) &  \quad (\lnot a \land b \land c) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) \lor (a \land b \land c) & \text{Given} \\
+		(1) &  \quad (\lnot a \land b \land c) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) \lor (a \land b \land c) & \text{Assump} \\
 		(2) & \quad (b \land c) \land (\lnot a \lor a) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) & \text{Distrib} \\
 		(3) & \quad (b \land c) \lor (a \land \lnot b \land c) \lor (a \land b \land \lnot c) & \text{Compl} \\
 		(4) & \quad (c \land (b \lor (a \land \lnot b)))  \lor (a \land b \land \lnot c) & \text{Distrib} \\
@@ -44,6 +44,7 @@ In a standard 1-bit full-adder, the carry-out is  $True$ when two, or all, of it
 		(8) & \quad (b \land (c \lor (a \land \lnot c)) \lor (c \land a)  & \text{Distrib} \\
 		(9) & \quad (b \land (c \lor a)) \lor (c \land a)  & \text{Distrib, Compl} \\
 		(10) & \quad  (a \land b) \lor (a \land c) \lor (b \land c) & \text{Distrib, Commut} \\
+		(11) & \quad  CO(a, b, c) \iff CO(a, b, c) & \text{Tauto} \\
 	\end{align*}
 \end{proof}
 
@@ -64,9 +65,20 @@ Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple c
 
 \noindent \textbf{Definition 3.1} Suppose $a_1$, $a_0$, $b_1$, $b_0$, and $c$ are propositions. Then, the first sum, second sum, and carry-out outputs for our 2-bit carry-look-ahead adder are defined as follows: 
 \begin{enumerate}
-	\item $ CLAS_0(a_0, b_0, c) :\equiv \\ (\lnot a_0 \land \lnot b_0 \land c) \lor (\lnot a_0 \land b_0 \land \lnot c) \lor \\ (a_0 \land b_0 \land c) \lor (a_0 \land \lnot b_0 \land \lnot c)$
+	\item $ CLAS_0(a_0, b_0, c) :\equiv \\ (\lnot a_0 \land \lnot b_0 \land c) \lor (\lnot a_0 \land b_0 \land \lnot c)  \lor \\ (a_0 \land \lnot b_0 \land \lnot c) \lor (a_0 \land b_0 \land c)$
 	\item $ CLAS_1(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv \\ (c \land a_1 \land a_0 \land b_1) \lor (c \land a_1 \land b_1 \land b_0) \lor \\ (c \land \lnot a_1 \land a_0 \land \lnot b_1) \lor (c \land \lnot a_1 \land \lnot b_1 \land b_0) \lor \\ (a_1 \land \lnot a_0 \land \lnot b_1 \land \lnot b_0) \lor (\lnot a_1 \land \lnot a_0 \land b_1 \land \lnot b_0) \lor \\ (\lnot c \land a_1 \land \lnot b_1 \land \lnot  b_0) \lor (\lnot c \land a_1 \land \lnot a_0 \land \lnot b_1) \lor \\ (\lnot c \land \lnot a_1 \land b_1 \land \lnot b_0) \lor (\lnot c \land \lnot a_1 \land \lnot a_0 \land b_1) \lor \\ (\lnot a_1 \land a_0 \land \lnot b_1 \land b_0) \lor (a_1 \land a_0 \land b_1 \land b_0) $
 	\item $ CLACO(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv \\ (c \land b_1 \land b_0) \lor (c \land a_1 \land a_0) \lor \\ (a_1 \land b_1) \lor (c \land a_0 \land b_1) \lor \\ (c \land a_1 \land b_0) \lor (a_0 \land b_1 \land b_0) \lor \\ (a_1 \land a_0 \land b_0) $
 \end{enumerate}
+
+\newpage
+
+\noindent \textbf{Lemma 3.1}  $ (\forall a, b, c \in \{T, F\}) CLAS_0(a, b, c) \iff S(a, b, c)  $ 
+\begin{proof}
+	\begin{align*}
+		(1) & \quad  (\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor (a \land \lnot b \land \lnot c) \lor (a \land b \land c) \\
+		& \iff (\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor (a \land \lnot b \land \lnot c) \lor (a \land b \land c) \\
+		& \text{Tauto}
+	\end{align*}
+\end{proof}
 
 \end{document}
