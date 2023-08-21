@@ -62,5 +62,11 @@ This definition highlights the recursive nature of \( CRACO \) and, by extension
 \section{Carry-Look-Ahead Adder}
 Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple configurations. They accomplish this by pre-calculating the carry-out dependencies. However, due to their complexity and size, we will focus only on  a 2-bit design, effectively halving our adder's state count.
 
+\noindent \textbf{Definition 3.1} Suppose $a_1$, $a_0$, $b_1$, $b_0$, and $c$ are propositions. Then, the first sum, second sum, and carry-out outputs for our 2-bit carry-look-ahead adder are defined as follows: 
+\begin{enumerate}
+	\item $ CLAS_0(a_0, b_0, c) :\equiv (\lnot a_0 \land \lnot b_0 \land c) \lor (\lnot a_0 \land b_0 \land \lnot c) \lor \\ (a_0 \land b_0 \land c) \lor (a_0 \land \lnot b_0 \land \lnot c)$
+	\item $ CLAS_1(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv $
+	\item $ CLACO $
+\end{enumerate}
 
 \end{document}
