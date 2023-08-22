@@ -1,12 +1,21 @@
 # Lambda32
 
+## _Project is a work in progress_
+
+_Progress report 08/21/2023:_ I have an idea of how the carry-ripple adder would be specified; a series of 2-bit carry-look-ahead adders as opposed to a typical full-adder configuration. This will efectively halve the states needed to sum two _n_-bit numbers. Currently, I am verifying the carry-look-ahead adder against the standard full-adder configuration to reinforce its integrity. Then, I will be confident enough to actually implement it in Verilog.
+
 ## Summary
 
-Lambda32 is a 32-bit, out-of-order execution processor that is mathematically specified and verified for correctness.
-using First-Order Logic and Finite-State Automata. Its name, Lambda32, came about as it features pure instructions
-based on the concept of mathematical functions, treating computation as the evaluation of mathematical functions and
-avoiding changing-state and mutable data. In addition, Lambda32 contains vector and matrix operations for enhanced
-neural network operations. A simulation of Lambda32 was written in Verilog.
+Lambda32 is a 32-bit pipelined processor with a robust mathematical foundation. Not only is it mathematically specified and verified for correctness, it also features a set of pure instructions, as its functional programming-inspired name implies. Additionally, Lambda32 integrates a neural network within its micro-architecture, enabling fast deep-learning processing directly at the hardware level.
+
+### Design Process
+
+The design process can be broken down into a couple of steps:
+
+- Specifying Lambda32 using predicate calculus (first-order logic).
+- Designing finite-state automata to derive the necessary combinational logic to implement Lambda32 in hardware.
+- Verifying that the combinational logic conforms to the specification by using mathematical proofs.
+- Implementing the verified combinational logic in Verilog HDL for subsequent FPGA programming.
 
 ## Table of Contents
 
