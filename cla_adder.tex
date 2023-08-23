@@ -25,12 +25,17 @@ In this section, we introduce the fundamental building blocks that are essential
 
 \begin{enumerate}
 	\item $CO(a, b, c) :\equiv (a \land b) \lor (a \land c) \lor (b \land c)$
-	\item $S(a, b, c) :\equiv (\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor (a \land \lnot b \land \lnot c) \lor (a \land b \land c)$
+	
+	\item $S(a, b, c) :\equiv 
+	(a \land b \land c) \lor 
+	(a \land \lnot b \land \lnot c) \lor 
+	(\lnot a \land b \land \lnot c) \lor
+	(\lnot a \land \lnot b \land c) $
 \end{enumerate}
 
 In a standard 1-bit full-adder, the carry-out is  $True$ when two, or all, of its operands are $True$. Further scrutiny of our minimal definition of $CO$ shows it conforms with this behavior:
 
-\noindent \textbf{Lemma 2.1}  $ (\forall a, b, c \in \{T, F\})CO(a, b, c) \iff  (\lnot a \land b \land c) \lor (a \land \lnot b \land c) \lor \\ (a \land b \land \lnot c) \lor  (a \land b \land c)$ 
+\noindent \textbf{Lemma 2.1}  $ (\forall a, b, c \in \{T, F\}) \: CO(a, b, c) \iff  (\lnot a \land b \land c) \lor (a \land \lnot b \land c) \lor \\ (a \land b \land \lnot c) \lor  (a \land b \land c)$ 
 
 \begin{proof}
 	\begin{align*}
@@ -50,10 +55,10 @@ In a standard 1-bit full-adder, the carry-out is  $True$ when two, or all, of it
 
 The $S$ output in a conventional full-adder should result to $True$ when exactly one, or all, of its inputs are $True$. Since our proposed definition of $S$ was not simplified, no further justification is necessary. We will now build upon our previous definitions to specify a standard $N$-bit carry-ripple adder.
 \newpage
-\noindent \textbf{Definition 2.2} Suppose $a_n$, $a_{n-1}$, $...$, $a_0$, $b_n$, $b_{n-1}$, $...$, $b_0$, and $c$ are propositions for any integer $ n \geq 0$. Then, carry-out and sum outputs of an $N$-bit carry-ripple adder are defined as follows: 
+\noindent \textbf{Definition 2.2} Suppose $a_n$, $a_{n-1}$, $\ldots$, $a_0$, $b_n$, $b_{n-1}$, $\ldots$, $b_0$, and $c$ are propositions for any integer $ n \geq 0$. Then, carry-out and sum outputs of an $N$-bit carry-ripple adder are defined as follows: 
 \begin{enumerate}
-	\item $ CRACO(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv CO(a_n, b_n, CO(..., CO(a_0, b_0, c))...)$
-	\item $ CRAS(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv S(a_n, b_n, CRACO(a_{n-1}, ..., a_0, b_{n-1}, ..., b_0, c)) $
+	\item $ CRACO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) :\equiv CO(a_n, b_n, CO(\ldots, CO(a_0, b_0, c))\ldots)$
+	\item $ CRAS(a_n, \ldots, a_0, b_n, \ldots, b_0, c) :\equiv S(a_n, b_n, CRACO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c)) $
 \end{enumerate}
 
 This definition highlights the recursive nature of \( CRACO \) and, by extension, \( CRAS \). This recursive structure arises because the output of each full-adder in a carry-ripple configuration depends on the carry-out of its preceding full-adders. With the essential building blocks defined, we can now delve into the details of our carry-look-ahead adder.
@@ -63,20 +68,68 @@ Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple c
 
 \noindent \textbf{Definition 3.1} Suppose $a_1$, $a_0$, $b_1$, $b_0$, and $c$ are propositions. Then, the first sum, second sum, and carry-out outputs for our 2-bit carry-look-ahead adder are defined as follows: 
 \begin{enumerate}
-	\item $ CLAS_0(a_0, b_0, c) :\equiv \\ (\lnot a_0 \land \lnot b_0 \land c) \lor (\lnot a_0 \land b_0 \land \lnot c)  \lor \\ (a_0 \land \lnot b_0 \land \lnot c) \lor (a_0 \land b_0 \land c)$
-	\item $ CLAS_1(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv \\ (a_1 \land a_0 \land b_1 \land c) \lor (a_1 \land b_1 \land b_0 \land c) \lor \\ (\lnot a_1 \land a_0 \land \lnot b_1 \land c) \lor (\lnot a_1 \land \lnot b_1 \land b_0 \land c) \lor \\ (a_1 \land \lnot a_0 \land \lnot b_1 \land \lnot b_0) \lor (\lnot a_1 \land \lnot a_0 \land b_1 \land \lnot b_0) \lor \\ (a_1 \land \lnot b_1 \land \lnot  b_0 \land \lnot c) \lor (a_1 \land \lnot a_0 \land \lnot b_1 \land \lnot c) \lor \\ (\lnot a_1 \land b_1 \land \lnot b_0 \land \lnot c) \lor (\lnot a_1 \land \lnot a_0 \land b_1 \lnot c) \lor \\ (\lnot a_1 \land a_0 \land \lnot b_1 \land b_0) \lor (a_1 \land a_0 \land b_1 \land b_0) $
-	\item $ CLACO(a_n, ..., a_0, b_n, ..., b_0, c) :\equiv \\ (b_1 \land b_0 \land c) \lor (a_1 \land a_0 \land c) \lor \\ (a_1 \land b_1) \lor (a_0 \land b_1 \land c) \lor \\ (a_1 \land b_0 \land c) \lor (a_0 \land b_1 \land b_0) \lor \\ (a_1 \land a_0 \land b_0) $
+	\item $ CLAS_0(a_0, b_0, c) :\equiv 
+	\\ (a_0 \land b_0 \land c) \lor 
+	   (a_0 \land \lnot b_0 \land \lnot c) \lor
+	\\ (\lnot a_0 \land b_0 \land \lnot c) \lor
+	   (\lnot a_0 \land \lnot b_0 \land c)$
+	   
+ 	\item $ CLAS_1(a_n, \ldots, a_0, b_n, \ldots, b_0, c) :\equiv 
+	\\ (a_1 \land a_0 \land b_1 \land b_0) \lor 
+	\\ (a_1 \land a_0 \land b_1 \land c) \lor
+	\\ (a_1 \land b_1 \land b_0 \land c) \lor 
+	\\ (a_1 \land \lnot a_0 \land \lnot b_1 \land \lnot b_0) \lor 
+	\\ (a_1 \land \lnot a_0 \land \lnot b_1 \land \lnot c) \lor 
+	\\ (a_1 \land \lnot b_1 \land \lnot  b_0 \land \lnot c) \lor 
+	\\ (\lnot a_1 \land a_0 \land \lnot b_1 \land b_0) \lor  
+	\\ (\lnot a_1 \land a_0 \land \lnot b_1 \land c) \lor 
+	\\ (\lnot a_1 \land b_1 \land \lnot b_0 \land \lnot c) \lor 
+	\\ (\lnot a_1 \land \lnot a_0 \land b_1 \land \lnot b_0) \lor
+	\\ (\lnot a_1 \land \lnot a_0 \land b_1 \lnot c) \lor 
+	\\ (\lnot a_1 \land \lnot b_1 \land b_0 \land c) $
+
+	\item $ CLACO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) :\equiv 
+	\\ (a_1 \land a_0 \land b_0) \lor
+	   (a_1 \land a_0 \land c) \lor 
+	\\ (a_1 \land b_0 \land c) \lor 
+	   (a_1 \land b_1) \lor 
+	\\ (a_0 \land b_1 \land c) \lor 
+	   (a_0 \land b_1 \land b_0) \lor
+	\\ (b_1 \land b_0 \land c) $
+	   
+	
+
 \end{enumerate}
 
 \newpage
 
-\noindent \textbf{Lemma 3.1}  $ (\forall a, b, c \in \{T, F\}) CLAS_0(a, b, c) \iff S(a, b, c)  $ 
+\noindent \textbf{Lemma 3.1}  $ (\forall a, b, c \in \{T, F\}) \: CLAS_0(a, b, c) \iff S(a, b, c)  $ 
 \begin{proof}
 	\begin{align*}
-		(1) & \quad  (\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor (a \land \lnot b \land \lnot c) \lor (a \land b \land c) \\
-		& \iff (\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor (a \land \lnot b \land \lnot c) \lor (a \land b \land c) \\
-		& \text{Tauto}
+	(\lnot a \land \lnot b \land c) \lor (\lnot a \land b \land \lnot c) \lor 
+	(a \land \lnot b \land \lnot c) \lor (a \land b \land c) 
+	\\ \iff (\lnot a \land \lnot b \land c) \lor 
+	(\lnot a \land b \land \lnot c) \lor 
+	(a \land \lnot b \land \lnot c) \lor (a \land b \land c) \\
+	& \text{Tauto}
 	\end{align*}
+\end{proof}
+
+\noindent \textbf{Lemma 3.3}  $ (\forall a, b, c \in \{T, F\}) \: CLAS_0(a, b, c) \iff S(a, b, c)  $ 
+
+\begin{proof}
+	Start of the main proof.
+	
+	\textbf{Subproof 1:} Statement or claim of the first subproof.
+	
+	Proof of the first subproof...
+	
+	\textbf{Subproof 2:} Statement or claim of the second subproof.
+	
+	Proof of the second subproof...
+	
+	... continue the main proof using results from the subproofs.
+	
 \end{proof}
 
 \end{document}
