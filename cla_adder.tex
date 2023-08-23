@@ -146,11 +146,27 @@ Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple c
 			   \intertext{The resulting three  disjunctions correspond to (1), (2) and (3) in $CLAS_1$}
 	\end{align*}
 	
-	\textbf{Subproof 2:} Statement or claim of the second subproof.
-	
-	Proof of the second subproof...
-	
-	... continue the main proof using results from the subproofs.
+	\textbf{Subproof 2:}  Expanding disjunction (2)  from $S(a_1, b_1, CO(a_0, b_0, c))$:
+
+\begin{align*}
+	(1)  & \quad (a_1 \land \lnot b_1 \land \lnot((a_0 \land b_0) \lor (a_0 \land c) \lor (b_0 \land c)) ) \\
+	(2)  & \quad (a_1 \land \lnot b_1 \land ((\lnot a_0 \lor \lnot b_0) \land (\lnot a_0 \lor \lnot c) \land (\lnot b_0 \lor \lnot c)))  && \text{De Morgan} \\
+	&	\qquad \text{(I) Let $A = \lnot a_0, B = \lnot b_0, C = \lnot c$, then, we have:} \\
+	&	\qquad \quad (i)  \: a_1 \land \lnot b_1 \land ((A \lor B) \land (A \lor C) \land (B \lor C))  \\
+	&	\qquad \quad (ii)  \: a_1 \land \lnot b_1 \land (
+		(A \land A \land B) \lor
+		(A \land A \land C) \lor \\
+		& \qquad \qquad \: (A \land C \land B) \lor
+		(A \land C \land C) \lor
+		(B \land A \land B) \lor \\
+		& \qquad \qquad \: (B \land A \land C) \lor
+		(B \land C \land B) \lor
+		(B \land C \land C)) && \text{Distrib} \\
+	&	\qquad \quad (iii)  \: a_1 \land \lnot b_1 \land ((A \land B) \lor(A \land C) \lor \\ 
+	& \qquad \qquad \: (A \land B \land C) \lor (B \land C)) && \text{Idemp, Commut}  \\
+	&	\qquad \quad (iv)  \: a_1 \land \lnot b_1 \land ((A \land B) \lor(A \land C) \lor (B \land C)) && \text{Absorp}  \\
+	\intertext{The resulting three  disjunctions correspond to (1), (2) and (3) in $CLAS_1$}
+\end{align*}
 	
 \end{proof}
 
