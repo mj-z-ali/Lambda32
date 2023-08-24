@@ -150,22 +150,21 @@ Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple c
 
 \begin{align*}
 	(1)  & \quad (a_1 \land \lnot b_1 \land \lnot((a_0 \land b_0) \lor (a_0 \land c) \lor (b_0 \land c)) ) \\
-	(2)  & \quad (a_1 \land \lnot b_1 \land ((\lnot a_0 \lor \lnot b_0) \land (\lnot a_0 \lor \lnot c) \land (\lnot b_0 \lor \lnot c)))  && \text{De Morgan} \\
-	&	\qquad \text{(I) Let $A = \lnot a_0, B = \lnot b_0, C = \lnot c$, then, we have:} \\
-	&	\qquad \quad (i)  \: a_1 \land \lnot b_1 \land ((A \lor B) \land (A \lor C) \land (B \lor C))  \\
-	&	\qquad \quad (ii)  \: a_1 \land \lnot b_1 \land (
-		(A \land A \land B) \lor
-		(A \land A \land C) \lor \\
-		& \qquad \qquad \: (A \land C \land B) \lor
-		(A \land C \land C) \lor
-		(B \land A \land B) \lor \\
-		& \qquad \qquad \: (B \land A \land C) \lor
-		(B \land C \land B) \lor
+	(2)  & \quad (a_1 \land \lnot b_1 \land ((\lnot a_0 \lor \lnot b_0) \land (\lnot a_0 \lor \lnot c) \land (\lnot b_0 \lor \lnot c)))  && \text{De Morgan} \\ \\
+	&	\quad \textbf{Let} \:  A = \lnot a_0, B = \lnot b_0, C = \lnot c, \text{we then have:} \\ \\
+	& \quad (i)  \: a_1 \land \lnot b_1 \land ((A \lor B) \land (A \lor C) \land (B \lor C)) \\
+	&	\quad (ii)  \: a_1 \land \lnot b_1 \land ((A \land A \land B) \lor 						(A \land A 	\land C) \lor \\
+		& \qquad \: (A \land C \land B) \lor (A \land C \land C) \lor (B \land A \land B) \lor \\
+		& \qquad \: (B \land A \land C) \lor (B \land C \land B) \lor
 		(B \land C \land C)) && \text{Distrib} \\
-	&	\qquad \quad (iii)  \: a_1 \land \lnot b_1 \land ((A \land B) \lor(A \land C) \lor \\ 
-	& \qquad \qquad \: (A \land B \land C) \lor (B \land C)) && \text{Idemp, Commut}  \\
-	&	\qquad \quad (iv)  \: a_1 \land \lnot b_1 \land ((A \land B) \lor(A \land C) \lor (B \land C)) && \text{Absorp}  \\
-	\intertext{The resulting three  disjunctions correspond to (1), (2) and (3) in $CLAS_1$}
+	& \quad (iii)  \: a_1 \land \lnot b_1 \land ((A \land B) \lor(A \land C) \lor  (A \land B \land C) \lor (B \land C)) && \text{Idemp, Commut}  \\
+	& \quad (iv)  \: a_1 \land \lnot b_1 \land ((A \land B) \lor(A \land C) \lor (B \land C)) && \text{Absorp}  \\
+	& \quad (v)  \: (a_1 \land A  \land \lnot b_1 \land  B) \lor(a_1 \land A  \land \lnot b_1 \land  C) \lor (a_1  \land \lnot b_1 \land B \land C)  && \text{Distrib}  \\ \\ 
+	&	\quad \text{After substituting, we have:} \\ \\
+	(3)  & \quad (a_1 \land \lnot a_0  \land \lnot b_1 \land  \lnot b_0) \lor \\
+		   & \quad (a_1 \land \lnot a_0  \land \lnot b_1 \land  \lnot c) \lor \\
+		   & \quad (a_1  \land \lnot b_1 \land \lnot b_0 \land \lnot c)\\
+	\intertext{The resulting three  disjunctions correspond to (4), (5) and (6) in $CLAS_1$}
 \end{align*}
 	
 \end{proof}
