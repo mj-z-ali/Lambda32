@@ -191,9 +191,25 @@ Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple c
 	\intertext{The resulting three  disjunctions correspond to (7), (8) and (12) in $CLAS_1$}
 \end{align*}
 	
-	\noindent We have shown through the expansion of $S(a_1, b_1, CO(a_0, b_0, c))$ that we get exactly the definition of $CLAS_1(a_1, a_0, b_1, b_0, c)$. \\
-	Therefore,  $CLAS_1(a_1, a_0, b_1, b_0, c) \iff S(a_1, b_1, CO(a_0, b_0, c))  $ 
+	\noindent We have showed by expanding $S(a_1, b_1, CO(a_0, b_0, c))$ that we get the exact definition of $CLAS_1(a_1, a_0, b_1, b_0, c)$. Therefore,  $CLAS_1(a_1, a_0, b_1, b_0, c) \iff S(a_1, b_1, CO(a_0, b_0, c))  $ 
 	
+\end{proof}
+
+
+\noindent \textbf{Lemma 3.3}  $ (\forall a_1, a_0, b_1, b_0, c \in \{T, F\}) \; CLACO(a_1, a_0, b_1, b_0, c) \iff CO(a_1, b_1, CO(a_0, b_0, c))  $ 
+
+\begin{proof}
+	\begin{align*}
+		(1) & \quad CO(a_1, b_1, CO(a_0, b_0, c)) && \text{Assump} \\
+		(2) & \quad (a_1 \land b_1)  \lor \\ 
+		& \quad (a_1 \land ((a_0 \land b_0) \lor (a_0 \land c) \lor (b_0 \land c)) ) \lor \\ 
+		& \quad (b_1 \land ((a_0 \land b_0) \lor (a_0 \land c) \lor (b_0 \land c))) 
+		&& \text{By Def. 2.1} \\
+		(3) & \quad (a_1 \land b_1)  \lor \\ 
+		& \quad (a_1 \land a_0 \land b_0) \lor (a_1 \land a_0 \land c) \lor (a_1 \land b_0 \land c) \lor \\
+		& \quad (a_0 \land b_1 \land b_0) \lor (a_0 \land b_1 \land c) \lor (b_1 \land b_0 \land c) && \text{Distrib}
+	\end{align*}
+	This is clearly the definition of $ CLACO(a_1, a_0, b_1, b_0, c) $ \\
 \end{proof}
 
 \end{document}
