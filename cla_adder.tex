@@ -223,19 +223,26 @@ Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple c
 	CLAS_1(a_n, a_{n-1}, b_n, b_{n-1}, CLANCO(a_{n-2}, \ldots, a_0, b_{n-2}, \ldots, b_0, c)) $
 \end{enumerate}
 
-\noindent \textbf{Lemma 3.4} For any integer $n \geq 2$, we have \\ $ (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANCO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRACO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
+\noindent \textbf{Definition 3.3}: Where $a_n, \ldots, a_0, b_n, \ldots, b_0$, and $c$ are propositions and $n$ is an integer, we have the following definitions:
+\begin{enumerate}
+\item $ P_{CO}(n) :\equiv (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANCO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRACO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
+\item  $P_{S_0}(n) :\equiv (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANS_0(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRAS(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
+\item $P_{S_1}(n) :\equiv (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANS_1(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRAS(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
+\end{enumerate}
+
+\noindent \textbf{Lemma 3.4}  For any positive integer $n$, we have $ P_{CO}(n))$
 \begin{proof}
 	\begin{align*}
 	\end{align*}
 \end{proof}
 
-\noindent \textbf{Lemma 3.5} For any integer $n \geq 2$, we have \\ $ (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANS_0(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRAS(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
+\noindent \textbf{Lemma 3.5} For any positive integer $n$, we have $ P_{S_0}(n) $
 \begin{proof}
 	\begin{align*}
 	\end{align*}
 \end{proof}
 
-\noindent \textbf{Lemma 3.6} For any integer $n \geq 2$, we have \\ $ (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANS_1(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRAS(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
+\noindent \textbf{Lemma 3.6} For any positive integer $n$, we have $ P_{S_1}(n) $
 \begin{proof}
 	\begin{align*}
 	\end{align*}
