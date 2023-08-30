@@ -223,17 +223,43 @@ Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple c
 	CLAS_1(a_n, a_{n-1}, b_n, b_{n-1}, CLANCO(a_{n-2}, \ldots, a_0, b_{n-2}, \ldots, b_0, c)) $
 \end{enumerate}
 
-\noindent \textbf{Definition 3.3}: Where $a_n, \ldots, a_0, b_n, \ldots, b_0$, and $c$ are propositions and $n$ is an integer, we have the following definitions:
+\noindent \textbf{Definition 3.3}: Suppose $a_n, \ldots, a_0, b_n, \ldots, b_0$, and $c$ are propositions and $n$ is any positive integer, then we have the following:
 \begin{enumerate}
 \item $ P_{CO}(n) :\equiv (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANCO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRACO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
 \item  $P_{S_0}(n) :\equiv (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANS_0(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRAS(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
 \item $P_{S_1}(n) :\equiv (\forall a_n, \ldots, a_0, b_n, \ldots, b_0, c \in \{T, F\} ) \;  CLANS_1(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff CRAS(a_n, \ldots, a_0, b_n, \ldots, b_0, c) $
 \end{enumerate}
 
-\noindent \textbf{Lemma 3.4}  For any positive integer $n$, we have $ P_{CO}(n))$
-\begin{proof}
+\noindent \textbf{Lemma 3.4}  For any positive integer $n$, we have $ P_{CO}(n)$
+\begin{proof} We begin by proving the base case $P_{CO}(1)$, that is: \\ 
+	\textbf{Base:}
 	\begin{align*}
+	 & P_{CO}(1) \equiv  (\forall a_1, a_0, b_1, b_0, c \in \{T, F\} ) \;  CLANCO(a_1, a_0, b_1, b_0, c) \iff  \\ & \quad  CRACO(a_1, a_0, b_1, b_0, c) 
 	\end{align*}
+	By definition of $CLANCO$ and $CRACO$, all we really have to prove is:
+	\begin{align*}
+	&  (\forall a_1, a_0, b_1, b_0, c \in \{T, F\} ) \; CLACO(a_1, a_0, b_1, b_0) \iff \\ 
+	& \quad CO(a_1, b_1, CO(a_0, b_0, c)) 
+	\end{align*}
+	We already proved this by Lemma 3.3 \\ \\
+	\textbf{Inductive Hypothesis:} Suppose $P_{CO}(n) $ is $true$ for all integers $n \geq 1$. That is, $CLANCO(a_n, \ldots, a_0, b_n, \ldots, b_0, c) \iff 
+	 \: CRACO(a_n, \ldots, a_0, b_n, \ldots, b_0, c)$  \\ \\
+	\textbf{Inductive Step:} We show that $P_{CO}(n+1)$ is also $true$: \\
+	Given our inductive hypothesis we can assume \\  \\
+	 $ CRACO(a_{n+1}, \ldots, a_0, b_{n+1}, \ldots, b_0, c)$, which, by definition of 2.2 is \\ \\
+	   $CO(a_{n+1}, b_{n+1}, CO(a_n, b_n, CO(\ldots, CO(a_0, b_0, c))\ldots)$. \\ \\
+	    Now, from our inductive hypothesis and definition 3.2, the innermost nested \\ \\
+	     $CO(a_n, b_n, CO(\ldots, CO(a_0, b_0, c))\ldots)$  is equivalent to \\ \\
+	      $CLACO(a_n, a_{n-1}, b_n, b_{n-1}, CLACO(\ldots, CLACO(a_1, a_0, b_1, b_0, c))\ldots)$, \\ \\ 
+	      but we will only substitute the $n-2$ portion on downward: \\ \\
+	    
+	       $CO(a_{n+1}, b_{n+1}, CO(a_n, b_n, CLACO(a_{n-1}, a_{n-2}, b_{n-1}, b_{n-2}, CLACO(\ldots, CLACO(a_1, a_0, b_1, b_0, c))\ldots)$
+	      
+	      
+	      
+	 
+	 
+	
 \end{proof}
 
 \noindent \textbf{Lemma 3.5} For any positive integer $n$, we have $ P_{S_0}(n) $
