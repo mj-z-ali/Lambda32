@@ -259,19 +259,45 @@ Carry-look-ahead adders reduce the delays inherent in traditional carry-ripple c
 	       By definition 2.1, we have: \\
 	       
 	       \begin{align*}
-	       	& (a_{n+1} \land b_{n+1}) \lor \\ 
-	       	& (a_{n+1} \land (a_{n} \land b_{n}) \lor \\  
-	       	& \quad (a_{n} \land c) \lor \\
-	       	& \quad (b_{n} \land c) )\lor \\ 
-	       	& (b_{n+1} \land (a_{n} \land b_{n}) \lor \\  
-	       	& \quad (a_{n} \land c) \lor \\
-	       	& \quad (b_{n} \land c) )\lor \\ 
+	       & \left[a_{n+1} \land b_{n+1} \right] \lor \\ 
+	       	& \left[ a_{n+1} \land (a_{n} \land b_{n}) \lor \right. \\  
+	      	&\qquad (a_{n} \land CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c)) \lor \\
+	       &\qquad \left.  (b_{n} \land CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c))\right] \lor \\ 
+	       	&  \left[ b_{n+1} \land (a_{n} \land b_{n}) \lor \right. \\  
+	       	&\qquad (a_{n} \land CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c)) \lor \\
+	       &\qquad \left. (b_{n} \land CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c)) \right] \\
 	       \end{align*}
 
+	      Which after distributing becomes:
 	      
+	      \begin{align*}
+	      	& \left[a_{n+1} \land b_{n+1} \right] \lor \\ 
+	      	& \left[ (a_{n+1} \land a_{n} \land b_{n}) \lor \right. \\  
+	      	&\qquad (a_{n+1} \land a_{n} \land CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c)) \lor \\
+	      	&\qquad \left.  (a_{n+1} \land b_{n} \land CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c))\right] \lor \\ 
+	      	&  \left[ (a_{n} \land b_{n+1} \land b_{n}) \lor \right. \\  
+	      	&\qquad (a_{n} \land b_{n+1} \land CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c)) \lor \\
+	      	&\qquad \left. (b_{n+1} \land b_{n} \land CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c)) \right] \\
+	      \end{align*}
 	      
-	 
-	 
+	      By definition 3.1, this is equivalent to: \\
+	      \begin{align*}
+	      		 & CLACO(a_{n+1}, a_n, b_{n+1}, b_n, CLANCO(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c)) 
+	      \end{align*}
+	      
+	      which, by definiton 3.2 is:
+	      
+	      \begin{align*}
+			& CLANCO(a_{n+1}, \ldots, a_0, b_{n+1}, \ldots, b_0, c) 
+		\end{align*}
+	 	
+	 	Since we derived the definition of $CLANCO(a_{n+1}, \ldots, a_0, b_{n+1}, \ldots, b_0, c) $ from $CRACO(a_{n+1}, \ldots, a_0, b_{n+1}, \ldots, b_0, c)$, we can conclude:
+	 	
+		 \begin{align*}
+	 		P_{CO}(n+1) \equiv CLANCO(a_{n+1}, \ldots, a_0, b_{n+1}, \ldots, b_0, c) \iff \\
+	 		CRACO(a_{n+1}, \ldots, a_0, b_{n+1}, \ldots, b_0, c)
+	 	\end{align*}
+	 By induction $P_{CO}(n)$ is $true$ for all integers $n \geq 1$.
 	
 \end{proof}
 
